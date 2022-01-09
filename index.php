@@ -1,14 +1,10 @@
 <?php
-if (empty($_GET['x'])) {
-    echo "<script>window.location='login.php';</script>";
-} elseif (isset($_GET['x'])) {
-    $link = array("login","home","profile");
+session_start();
 
-    foreach ($link as $value) {
-        if ($value == $_GET['x']) {
-            require "$value" . ".php";
-        }
-    }
+if (empty($_GET['x']) or empty($_SESSION['username'])) {
+    echo "<script>window.location='sign-in';</script>";
+} elseif ($_GET['x'] == 'template') {
+    echo "<script>window.location='view/';</script>";
 } else {
-    require "home.php";
+    echo '<script>alert("Website sedang bermasalah, mohon kontak admin");</script>';
 }
